@@ -1,5 +1,7 @@
 package az.edu.ada.wm2.courseservice.model.entity;
 
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,5 +36,8 @@ public class Enrollment {
 
     @Column(name = "student_id", nullable = false)
     private Long studentId;
+
+    @Column(name = "enrollment_date", nullable = false)
+    private LocalDate enrollmentDate;
 
 }
