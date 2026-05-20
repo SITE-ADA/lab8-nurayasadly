@@ -55,6 +55,11 @@ public class GlobalExceptionHandler {
         return buildErrorResponse(HttpStatus.BAD_REQUEST, message, request.getRequestURI());
     }
 
+    @ExceptionHandler(PrerequisiteNotCompletedException.class)
+    public ResponseEntity handlePrerequisiteNotCompleted(PrerequisiteNotCompletedException ex, HttpServletRequest request) {
+        return buildErrorResponse(HttpStatus.BAD_REQUEST,ex.getMessage(),request.getRequestURI());
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiErrorResponse> handleGeneralException(
             Exception ex,
