@@ -59,6 +59,25 @@ public class CourseService {
                 .toList();
     }
 
+
+
+    public List<CourseResponseDto> getCoursesByStudentName(String name) {
+        List<StudentDto> students = studentFeignClient.searchStudentsByName(name);
+    
+        List<Long> studentIds = students.stream()
+                .map(StudentDto::getId)
+                .toList();
+    
+        return studentIds.stream()
+                .flatMap(studentId -> enrollmentRepository.findByStudentId(studentId).stream())
+                .map(Enrollment::getCourseId)
+                .distinct()
+                .map(this::findCourseOrThrow)
+                .map(this::toCourseResponseDto)
+                .toList();
+    }
+    
+
     public CourseResponseDto getCourseById(Long id) {
         Course course = findCourseOrThrow(id);
         return toCourseResponseDto(course);

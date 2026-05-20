@@ -17,7 +17,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.Param;
+
 
 @RestController
 @RequestMapping("/api/v1/students")
@@ -44,6 +47,12 @@ public class StudentController {
     @Operation(summary = "Get student by id", description = "Returns a single student by id.")
     public ResponseEntity<StudentResponseDto> getStudentById(@PathVariable Long id) {
         return ResponseEntity.ok(studentService.getStudentById(id));
+    }
+
+    @GetMapping("/search")
+    @Operation(summary = "Tələbəni ada görə axtar", description = "Ad və ya soyada görə tələbələri qaytarır.")
+    public ResponseEntity<List<StudentResponseDto>> searchStudentsByName(@RequestParam String name) {
+        return ResponseEntity.ok(studentService.searchStudentsByName(name));
     }
 
     @PutMapping("/{id}")

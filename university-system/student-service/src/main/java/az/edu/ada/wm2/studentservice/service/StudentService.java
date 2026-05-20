@@ -34,6 +34,14 @@ public class StudentService {
                 .toList();
     }
 
+    public List searchStudentsByName(String name) {
+        return studentRepository.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(name, name)
+                .stream()
+                .map(this::toStudentResponseDto)
+                .toList();
+    }
+
+
     public StudentResponseDto getStudentById(Long id) {
         Student student = findStudentOrThrow(id);
         return toResponseDto(student);
