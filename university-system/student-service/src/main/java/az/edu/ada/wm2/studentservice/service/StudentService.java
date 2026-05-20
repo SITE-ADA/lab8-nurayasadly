@@ -34,10 +34,11 @@ public class StudentService {
                 .toList();
     }
 
-    public List searchStudentsByName(String name) {
-        return studentRepository.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(name, name)
+    public List<StudentResponseDto> searchStudentsByName(String name) {
+        return studentRepository
+                .findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(name, name)
                 .stream()
-                .map(this::toStudentResponseDto)
+                .map(this::toResponseDto)
                 .toList();
     }
 

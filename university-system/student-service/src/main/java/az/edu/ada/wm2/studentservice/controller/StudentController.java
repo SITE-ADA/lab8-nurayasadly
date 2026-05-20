@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.Param;
 
 
 @RestController
@@ -52,9 +51,9 @@ public class StudentController {
 
     @GetMapping("/search")
     @Operation(summary = "Tələbəni ada görə axtar", description = "Ad və ya soyada görə tələbələri qaytarır.")
-    public ResponseEntity<List<StudentResponseDto>> searchStudentsByName(@RequestParam String name) {
+        public ResponseEntity<List<StudentResponseDto>> searchStudentsByName(@RequestParam String name) {
         return ResponseEntity.ok(studentService.searchStudentsByName(name));
-    }
+}
 
     @PutMapping("/{id}")
     @Operation(summary = "Tələbəni yenilə", description = "Verilmiş ID-yə əsasən tələbə məlumatlarını yeniləyir.")
